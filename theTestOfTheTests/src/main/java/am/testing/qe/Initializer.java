@@ -2,6 +2,8 @@ package am.testing.qe;
 
 import am.testing.qe.util.Browser;
 
+import static am.testing.qe.config.Constants.DEFAULT_BROWSER;
+
 public class Initializer {
 
     private static Initializer initializer = new Initializer();
@@ -13,7 +15,11 @@ public class Initializer {
     }
 
     public Browser getCurrentBrowser() {
-        String strBrowserName = System.getenv("browser").toUpperCase();
+        String browserName = System.getenv("browser");
+        if(browserName == null){
+            return DEFAULT_BROWSER;
+        }
+        String strBrowserName = browserName.toUpperCase();
         return Browser.valueOf(strBrowserName);
     }
 }
